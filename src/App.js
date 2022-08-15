@@ -8,14 +8,17 @@ export const App = () => {
 
   useEffect(() => {
     localStorage.setItem('gameStatus', gameStatus);
+    localStorage.setItem('answer_key', JSON.stringify([' ',' ',' ',' ',' ']));
   }, [gameStatus]);
 
   const pickedQuestions = getQuestions(questions);
 
   return (
-    <div>
+    <div className="root-container">
       {localStorage.getItem('gameStatus') ? (
-        <QuestionCards questions={pickedQuestions} />
+        <div className="game-container">
+          <QuestionCards questions={pickedQuestions} />
+        </div>
       ):(
         <div>
           <h3>Game not started.</h3>
