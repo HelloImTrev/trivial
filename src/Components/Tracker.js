@@ -6,17 +6,17 @@ export const Tracker = ({ questions, currentQuestion }) => {
       <p className="tracker-label">Question: </p>
       {questions.map((question, index) => {
         return (
-          <>
+          <div key={index}>
             {index === currentQuestion ? (
-              <p key={index} className="tracker-number" style={{color: 'white'}}>
+              <p className="tracker-number" style={{color: 'white'}}>
                 <strong>{index + 1}</strong>
               </p>
             ) : (
-              <p key={index} className="tracker-number">
+              <p className="tracker-number">
                 {index + 1}
               </p>
             )}
-          </>
+          </div>
         );
       })}
     </div>

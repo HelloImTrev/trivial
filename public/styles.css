@@ -7,9 +7,21 @@ body {
   color: #b8c1ec;
 }
 
+a {
+  color: #b8c1ec;
+}
+
 .game-container {
   display: flex;
   justify-content: center;
+}
+
+.credits {
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 11px;
 }
 
 .question-text-container {
@@ -25,7 +37,7 @@ body {
 
 .question-card {
   max-width: 43rem;
-  border: white 1px solid;
+  border: white 2px solid;
   border-radius: 15px;
 }
 
@@ -64,20 +76,51 @@ body {
   touch-action: manipulation;
 }
 
+.next-button {
+  align-items: center;
+  background-color: #b8c1ec;
+  border: 2px solid #121629;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #232946;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: 35%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
 .tracker {
   display: flex;
 }
 
-.tracker > p {
+.tracker > div > p {
+  font-family: 'Dosis', sans-serif;
+}
+
+.tracker-label {
   font-family: 'Dosis', sans-serif;
 }
 
 .question-card-footer {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+
 }
-
-
 
 .tracker-number {
   margin-left: .5rem;

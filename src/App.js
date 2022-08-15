@@ -4,27 +4,37 @@ import { QuestionCards } from "./Components/QuestionCards";
 import { getQuestions } from "./Utility/questionFuncs";
 
 export const App = () => {
-  const [gameStatus, setGameStatus] = useState(null);
+  const [gameStatus, setGameStatus] = useState(JSON.parse(localStorage.getItem("gameStatus")));
 
   useEffect(() => {
-    localStorage.setItem('gameStatus', gameStatus);
-    localStorage.setItem('answer_key', JSON.stringify([' ',' ',' ',' ',' ']));
+    if(!localStorage.getItem("gameStatus")) {
+      localStorage.setItem("gameStatus", JSON.stringify(false));
+    } else {
+      localStorage.setItem("gameStatus", JSON.stringify(gameStatus));
+    }
+
+    if (!localStorage.getItem("answer_key")) {
+      localStorage.setItem("answer_key", JSON.stringify([]));
+    }
   }, [gameStatus]);
 
   const pickedQuestions = getQuestions(questions);
 
   return (
     <div className="root-container">
-      {localStorage.getItem('gameStatus') ? (
+      {gameStatus ? (
         <div className="game-container">
-          <QuestionCards questions={pickedQuestions} />
+          <QuestionCards questions={pickedQuestions} setGameStatus={setGameStatus}/>
         </div>
-      ):(
+      ) : (
         <div>
           <h3>Game not started.</h3>
           <button onClick={() => setGameStatus(true)}>Click to start!</button>
         </div>
       )}
+      <div className="credits">
+        <p>Made with ❤️ by <a href="https://github.com/HelloImTrev">Trevor Latimer</a></p>
+      </div>
     </div>
   );
 };

@@ -4,23 +4,29 @@ today.setDate(today.getDate());
 
 export function getQuestions (questions) {
   const diff = Math.floor((today.getTime() - baseDate.getTime()) / 864e5);
-  console.log(diff);
   return questions[diff];
 }
 
 export const getAnswers = ( question ) => {
-  const allAnswers = []
+  const allAnswers = [];
+
   const correctAnswer = question.correctAnswer;
   const incorrectAnswers = question.incorrectAnswers;
   
-  allAnswers.push(correctAnswer);
-  incorrectAnswers.forEach(answer => allAnswers.push(answer));
+  //Left it open to implment "Shuffle only once"
+  allAnswers.push({answer: correctAnswer, shuffled: false});
+  incorrectAnswers.forEach(answer => allAnswers.push({
+    answer: answer,
+    shuffled: false
+  }));
 
   return shuffleAnswers(allAnswers);
 };
 
+//Shuffles answer array so correct answer isn't always index 0
 const shuffleAnswers = (answers) => {
   for (let i = answers.length -1; i > 0; i--) {
+
     const j = Math.floor(Math.random() * (i + 1));
     const temp = answers[i];
     answers[i] = answers[j];
