@@ -1,18 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 
-export const Answers = ({ answers, questions, currentQuestion, checkAnswer }) => {
+export const Answers = ({
+  answers,
+  questions,
+  currentQuestion,
+  checkAnswer,
+  answerKey,
+  answerButtons
+}) => {
+   
+  
+
   return (
     <>
       {answers.map((answer, index) => {
         return (
-          <div key={index}>
             <button
+              key={index}
+              ref={answerButtons.current[index]}
               className="answer-button"
               onClick={() => checkAnswer(answer, questions[currentQuestion])}
             >
               {answer.answer}
             </button>
-          </div>
         );
       })}
     </>

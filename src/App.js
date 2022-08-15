@@ -4,10 +4,12 @@ import { QuestionCards } from "./Components/QuestionCards";
 import { getQuestions } from "./Utility/questionFuncs";
 
 export const App = () => {
-  const [gameStatus, setGameStatus] = useState(JSON.parse(localStorage.getItem("gameStatus")));
+  const [gameStatus, setGameStatus] = useState(
+    JSON.parse(localStorage.getItem("gameStatus"))
+  );
 
   useEffect(() => {
-    if(!localStorage.getItem("gameStatus")) {
+    if (!localStorage.getItem("gameStatus")) {
       localStorage.setItem("gameStatus", JSON.stringify(false));
     } else {
       localStorage.setItem("gameStatus", JSON.stringify(gameStatus));
@@ -19,12 +21,17 @@ export const App = () => {
   }, [gameStatus]);
 
   const pickedQuestions = getQuestions(questions);
+  let answer_key = JSON.parse(localStorage.getItem("answer_key"));
 
   return (
     <div className="root-container">
       {gameStatus ? (
         <div className="game-container">
-          <QuestionCards questions={pickedQuestions} setGameStatus={setGameStatus}/>
+          <QuestionCards
+            questions={pickedQuestions}
+            setGameStatus={setGameStatus}
+            answer_key={answer_key}
+          />
         </div>
       ) : (
         <div>
@@ -33,7 +40,10 @@ export const App = () => {
         </div>
       )}
       <div className="credits">
-        <p>Made with ❤️ by <a href="https://github.com/HelloImTrev">Trevor Latimer</a></p>
+        <p>
+          Made with ❤️ by{" "}
+          <a href="https://github.com/HelloImTrev">Trevor Latimer</a>
+        </p>
       </div>
     </div>
   );
