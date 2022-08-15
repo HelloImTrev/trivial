@@ -49,7 +49,7 @@ body {
   color: #232946;
   cursor: pointer;
   display: flex;
-  font-family: Inter,sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 16px;
   height: 68px;
   justify-content: center;
@@ -64,4 +64,22 @@ body {
   touch-action: manipulation;
 }
 
+.tracker {
+  display: flex;
+}
 
+.tracker > p {
+  font-family: 'Dosis', sans-serif;
+}
+
+.question-card-footer {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.tracker-number {
+  margin-left: .5rem;
+  margin-right: .5rem;
+}

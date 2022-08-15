@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAnswers } from "../Utility/questionFuncs";
+import { Tracker } from "./Tracker";
 
 export const QuestionCards = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -12,17 +13,14 @@ export const QuestionCards = ({ questions }) => {
 
   const checkAnswer = (answer, question) => {
     let answer_key = JSON.parse(localStorage.getItem('answer_key'));
-    console.log(answer_key);
 
     if (answer === question.correctAnswer) {
       answer_key[currentQuestion] = 'correct';
       localStorage.setItem('answer_key', JSON.stringify(answer_key));
-      // localStorage.setItem('answer_key') = answer_key;
       setCurrentQuestion(currentQuestion + 1);
     } else {
       answer_key[currentQuestion] = 'incorrect';
       localStorage.setItem('answer_key', JSON.stringify(answer_key));
-      // localStorage.setItem('answer_key') = answer_key;
       setCurrentQuestion(currentQuestion + 1);
     }
   }
@@ -42,6 +40,9 @@ export const QuestionCards = ({ questions }) => {
             </div>
           )
         })}
+      </div>
+      <div className="question-card-footer">
+        <Tracker questions={questions} currentQuestion={currentQuestion} />
       </div>
     </div>
   );
