@@ -100,6 +100,30 @@ a {
   touch-action: manipulation;
 }
 
+.next-button-disabled {
+  align-items: center;
+  background-color: #c9c9ca;
+  border: 2px solid #121629;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #797979;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 16px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  width: 35%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
 
 .tracker {
   display: flex;
