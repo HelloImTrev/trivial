@@ -28,8 +28,8 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
   //"answer_key" to track what question the user left off on
   //This prevents being able to refresh to restart the game
   const checkAnswer = (answer, question) => {
-     nextButton.current.className = "next-button";
-     nextButton.current.disabled = false;
+    nextButton.current.className = "next-button";
+    nextButton.current.disabled = false;
 
     for (const button of answerButtons.current) {
       button.current.disabled = true;
@@ -41,7 +41,7 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
     const selectedAnswer = answerButtons.current.find(
       (button) => button.current.innerText === answer.answer
     );
-    
+
     if (answer.answer === question.correctAnswer) {
       answer_key[currentQuestion] = "correct";
       localStorage.setItem("answer_key", JSON.stringify(answer_key));
@@ -61,13 +61,15 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       button.current.disabled = false;
       button.current.style.backgroundColor = "#eebbc3";
     }
+    setCurrentQuestion(currentQuestion + 1);
+  };
 
-    if (currentQuestion === 4) {
-      setGameStatus(false);
-      localStorage.setItem("answer_key", JSON.stringify([]));
-    } else {
-      setCurrentQuestion(currentQuestion + 1);
-    }
+  const finishGame = () => {
+    setGameStatus(false);
+    const prevAnswers = JSON.parse(localStorage.getItem("answer_key"));
+
+    localStorage.setItem("prev_answers", JSON.stringify(prevAnswers));
+    localStorage.setItem("answer_key", JSON.stringify([]));
   };
 
   return (
@@ -87,12 +89,15 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       </div>
       <div className="question-card-footer">
         <Tracker questions={questions} currentQuestion={currentQuestion} />
-        <button
-          ref={nextButton}
-          onClick={() => nextQuestion()}
-        >
-          Next Question
-        </button>
+        {currentQuestion === 4 ? (
+          <button ref={nextButton} onClick={() => finishGame()}>
+            Finish
+          </button>
+        ) : (
+          <button ref={nextButton} onClick={() => nextQuestion()}>
+            Next Question
+          </button>
+        )}
       </div>
     </div>
   );

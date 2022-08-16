@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { questions } from "./Utility/questions";
 import { QuestionCards } from "./Components/QuestionCards";
 import { getQuestions } from "./Utility/questionFuncs";
+import { PreGame } from "./Components/PreGame";
 
 export const App = () => {
   const [gameStatus, setGameStatus] = useState(
@@ -34,9 +35,8 @@ export const App = () => {
           />
         </div>
       ) : (
-        <div>
-          <h3>Game not started.</h3>
-          <button onClick={() => setGameStatus(true)}>Click to start!</button>
+        <div className="pre-game-container">
+          <PreGame setGameStatus={setGameStatus}/>
         </div>
       )}
       <div className="credits">
