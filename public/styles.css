@@ -11,6 +11,10 @@ a {
   color: #b8c1ec;
 }
 
+p {
+  margin: 0;
+}
+
 .root-container {
   display: flex;
   flex-direction: column;
@@ -67,6 +71,21 @@ a {
   margin-left: 1rem;
   margin-right: 1rem;
   text-align: center;
+}
+
+.timer-cotainer {
+  text-align: center;
+}
+
+.timer-text {
+  font-family: 'Dosis', sans-serif;
+  color: white;
+}
+
+.timer-numbers {
+  font-size: 20px;
+  font-family: 'Titillium Web', sans-serif;
+  color: white;
 }
 
 .question-text {

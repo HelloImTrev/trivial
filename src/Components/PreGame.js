@@ -1,40 +1,77 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { DayTimer } from "./DayTimer";
 
 export const PreGame = ({ setGameStatus }) => {
   const prevAnswers = JSON.parse(localStorage.getItem("prev_answers"));
+  let last_played = new Date(new Date(localStorage.getItem("last_played")).setHours(0,0,0,0));
+
+  let date = new Date(new Date().setHours(0,0,0,0));
   let correctCount = 0;
   let percentage = 0;
+  const diff = Math.floor((date.getTime() - last_played.getTime()) / 864e5);
+
+  console.log(diff);
 
   if (prevAnswers) {
-    for(let i = 0; i < prevAnswers.length; i++) {
+    for (let i = 0; i < prevAnswers.length; i++) {
       if (prevAnswers[i] === "correct") {
         correctCount += 1;
       }
     }
 
-   percentage = (correctCount / prevAnswers.length) * 100;
+    percentage = (correctCount / prevAnswers.length) * 100;
+  }
+
+  const startGame = () => {
+    localStorage.setItem("last_played", date);
+    setGameStatus(true);
   };
 
   return (
     <div className="pre-game-card">
-      <div>
-        <h3 className="pre-game-title">Start today's Trivial?</h3>
-      </div>
+      {diff > 0 ? (
+        <div>
+          <div>
+            <h3 className="pre-game-title">Start today's Trivial?</h3>
+          </div>
+          <div className="previous-score">
+            <strong>
+              <p className="pre-score-label">Previous Score:</p>
+            </strong>
+            {prevAnswers ? (
+              <p className="pre-score">
+                {correctCount} / {prevAnswers.length} ({percentage}%)
+              </p>
+            ) : (
+              <p className="pre-score">No score</p>
+            )}
+          </div>
 
-      <div className="previous-score">
-        <strong>
-          <p className="pre-score-label">Previous Score:</p>
-        </strong>
-        {prevAnswers ? (
-          <p className="pre-score">{correctCount} / {prevAnswers.length} ({percentage}%)</p>
-        ) : (
-          <p className="pre-score">No score</p>
-        )}
-      </div>
-
-      <button className="start-button" onClick={() => setGameStatus(true)}>
-        Click to start!
-      </button>
+          <button className="start-button" onClick={() => startGame()}>
+            Start
+          </button>
+        </div>
+      ) : (
+        <div>
+          <div>
+            <h3 className="pre-game-title">Trivial completed for today!</h3>
+          </div>
+          <div className="previous-score">
+            <strong>
+              <p className="pre-score-label">Previous Score:</p>
+            </strong>
+            <p className="pre-score">
+              {correctCount} / {prevAnswers.length} ({percentage}%)
+            </p>
+          </div>
+          <div className="timer-cotainer">
+            <div className="timer-text">Next Tirvial available in:</div>
+            <div className="timer-numbers">
+              <DayTimer />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

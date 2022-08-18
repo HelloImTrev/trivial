@@ -36,7 +36,9 @@ export const App = () => {
         </div>
       ) : (
         <div className="pre-game-container">
-          <PreGame setGameStatus={setGameStatus}/>
+          <PreGame
+            setGameStatus={setGameStatus}
+          />
         </div>
       )}
       <div className="credits">
