@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, createRef } from "react";
 import { getAnswers } from "../Utility/questionFuncs";
 import { Answers } from "./Answers";
+import { Timer } from "./Timer";
 import { Tracker } from "./Tracker";
 
 export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
@@ -10,6 +11,7 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
 
   const [answers, setAsnwers] = useState([]);
   const [answered, setAnswered] = useState(false);
+  const [timeExpired, setTimeExpired] = useState(false);
   const nextButton = useRef();
   const answerButtons = useRef([
     React.createRef(),
@@ -23,38 +25,6 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
     nextButton.current.disabled = true;
     nextButton.current.className = "next-button-disabled";
   }, [currentQuestion]);
-
-  //Checks if answer picked was correct, if so stores in local storage
-  //"answer_key" to track what question the user left off on
-  //This prevents being able to refresh to restart the game
-  const checkAnswer = (answer, question) => {
-    nextButton.current.className = "next-button";
-    nextButton.current.disabled = false;
-
-    for (const button of answerButtons.current) {
-      button.current.disabled = true;
-    }
-
-    const correctButton = answerButtons.current.find(
-      (button) => button.current.innerText === question.correctAnswer
-    );
-    const selectedAnswer = answerButtons.current.find(
-      (button) => button.current.innerText === answer.answer
-    );
-
-    if (answer.answer === question.correctAnswer) {
-      answer_key[currentQuestion] = "correct";
-      localStorage.setItem("answer_key", JSON.stringify(answer_key));
-      selectedAnswer.current.style.backgroundColor = "#b1f1cd";
-      setAnswered(true);
-    } else {
-      answer_key[currentQuestion] = "incorrect";
-      localStorage.setItem("answer_key", JSON.stringify(answer_key));
-      selectedAnswer.current.style.backgroundColor = "#fc6060";
-      correctButton.current.style.backgroundColor = "#b1f1cd";
-      setAnswered(true);
-    }
-  };
 
   const nextQuestion = () => {
     for (const button of answerButtons.current) {
@@ -77,14 +47,20 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       <div className="question-text-container">
         <h2 className="question-text">{questions[currentQuestion].question}</h2>
       </div>
+      {/* <div className="timer-container">
+        <Timer setTimeExpired={setTimeExpired} />
+      </div> */}
       <div className="question-answers">
         <Answers
           answers={answers}
           questions={questions}
           currentQuestion={currentQuestion}
-          checkAnswer={checkAnswer}
-          answerKey={answer_key}
+          // checkAnswer={checkAnswer}
+          answer_key={answer_key}
           answerButtons={answerButtons}
+          nextButton={nextButton}
+          timeExpired={timeExpired}
+          setAnswered={setAnswered}
         />
       </div>
       <div className="question-card-footer">

@@ -3,14 +3,15 @@ import { DayTimer } from "./DayTimer";
 
 export const PreGame = ({ setGameStatus }) => {
   const prevAnswers = JSON.parse(localStorage.getItem("prev_answers"));
-  let last_played = new Date(new Date(localStorage.getItem("last_played")).setHours(0,0,0,0));
+  let streak = JSON.parse(localStorage.getItem("streak"));
+  let last_played = new Date(
+    new Date(localStorage.getItem("last_played")).setHours(0, 0, 0, 0)
+  );
 
-  let date = new Date(new Date().setHours(0,0,0,0));
+  let date = new Date(new Date().setHours(0, 0, 0, 0));
   let correctCount = 0;
   let percentage = 0;
   const diff = Math.floor((date.getTime() - last_played.getTime()) / 864e5);
-
-  console.log(diff);
 
   if (prevAnswers) {
     for (let i = 0; i < prevAnswers.length; i++) {
@@ -23,7 +24,14 @@ export const PreGame = ({ setGameStatus }) => {
   }
 
   const startGame = () => {
+    if (diff === 1) {
+      localStorage.setItem("streak", streak + 1);
+    } else {
+      localStorage.setItem("streak", 0);
+    }
+
     localStorage.setItem("last_played", date);
+
     setGameStatus(true);
   };
 
@@ -40,17 +48,24 @@ export const PreGame = ({ setGameStatus }) => {
             </strong>
             {prevAnswers ? (
               <p className="pre-score">
-                {correctCount} / {prevAnswers.length} ({percentage}%)
+                {correctCount} / {prevAnswers.length} correct ({percentage}%)
               </p>
             ) : (
               <p className="pre-score">No score</p>
             )}
           </div>
-
+          <div className="previous-score">
+            <strong>
+              <p className="pre-score-label">Streak:</p>
+            </strong>
+            <p className="pre-score">{streak}</p>
+          </div>
+              
           <button className="start-button" onClick={() => startGame()}>
             Start
           </button>
         </div>
+        
       ) : (
         <div>
           <div>
@@ -61,7 +76,7 @@ export const PreGame = ({ setGameStatus }) => {
               <p className="pre-score-label">Previous Score:</p>
             </strong>
             <p className="pre-score">
-              {correctCount} / {prevAnswers.length} ({percentage}%)
+              {correctCount} / {prevAnswers.length} correct ({percentage}%)
             </p>
           </div>
           <div className="timer-cotainer">

@@ -19,6 +19,10 @@ export const App = () => {
     if (!localStorage.getItem("answer_key")) {
       localStorage.setItem("answer_key", JSON.stringify([]));
     }
+
+    if (!localStorage.getItem("streak")) {
+      localStorage.setItem("streak", JSON.stringify(0));
+    }
   }, [gameStatus]);
 
   const pickedQuestions = getQuestions(questions);
