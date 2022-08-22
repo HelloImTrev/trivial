@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { copyToClipboard } from "../Utility/share";
+import { Answers } from "./Answers";
 import { DayTimer } from "./DayTimer";
 
 export const PreGame = ({ setGameStatus }) => {
@@ -24,7 +26,7 @@ export const PreGame = ({ setGameStatus }) => {
   }
 
   const startGame = () => {
-    if (diff === 1) {
+    if (diff <= 1) {
       localStorage.setItem("streak", streak + 1);
     } else {
       localStorage.setItem("streak", 0);
@@ -60,12 +62,16 @@ export const PreGame = ({ setGameStatus }) => {
             </strong>
             <p className="pre-score">{streak}</p>
           </div>
-              
-          <button className="start-button" onClick={() => startGame()}>
-            Start
-          </button>
+
+          <div className="buttons">
+            <button className="start-button" onClick={() => startGame()}>
+              Start
+            </button>
+            <button className="rules-button">
+              Rules
+            </button>
+          </div>
         </div>
-        
       ) : (
         <div>
           <div>
@@ -79,12 +85,21 @@ export const PreGame = ({ setGameStatus }) => {
               {correctCount} / {prevAnswers.length} correct ({percentage}%)
             </p>
           </div>
+          <div className="previous-score">
+            <strong>
+              <p className="pre-score-label">Streak:</p>
+            </strong>
+            <p className="pre-score">{streak}</p>
+          </div>
           <div className="timer-cotainer">
             <div className="timer-text">Next Tirvial available in:</div>
             <div className="timer-numbers">
               <DayTimer />
             </div>
           </div>
+          <button className="start-button" onClick={() => copyToClipboard(prevAnswers)}>
+              Share
+          </button>
         </div>
       )}
     </div>

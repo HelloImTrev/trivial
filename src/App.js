@@ -3,6 +3,7 @@ import { questions } from "./Utility/questions";
 import { QuestionCards } from "./Components/QuestionCards";
 import { getQuestions } from "./Utility/questionFuncs";
 import { PreGame } from "./Components/PreGame";
+import { Nav } from "./Components/Nav";
 
 export const App = () => {
   const [gameStatus, setGameStatus] = useState(
@@ -30,6 +31,7 @@ export const App = () => {
 
   return (
     <div className="root-container">
+      <Nav />
       {gameStatus ? (
         <div className="game-container">
           <QuestionCards

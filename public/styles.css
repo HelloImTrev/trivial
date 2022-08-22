@@ -5,6 +5,8 @@
 body {
   background-color: #232946;
   color: #b8c1ec;
+  padding: 0;
+  margin: 0;
 }
 
 a {
@@ -13,6 +15,21 @@ a {
 
 p {
   margin: 0;
+}
+
+.nav {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-title {
+  margin: 0;
+  font-family: 'Dosis', sans-serif;
+  color: white;
+  font-size: 35px;
+  text-decoration: underline;
 }
 
 .root-container {
@@ -74,6 +91,7 @@ p {
 }
 
 .timer-cotainer {
+  margin-top: 1rem;
   text-align: center;
 }
 
@@ -131,6 +149,32 @@ p {
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  margin-top: 1rem;
+}
+
+.rules-button {
+  align-items: center;
+  background-color: #eebbc3;
+  border: 2px solid #121629;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #232946;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Titillium Web', sans-serif;
+  font-size: 15px;
+  height: 38px;
+  justify-content: center;
+  line-height: 24px;
+  width: 100%;
+  padding: 0 15px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 1rem;
 }
 
 
@@ -231,4 +275,13 @@ p {
 .tracker-number {
   margin-left: .5rem;
   margin-right: .5rem;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons > button {
+  margin-left: .25rem;
+  margin-right: .25rem;
 }
