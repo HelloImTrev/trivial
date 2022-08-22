@@ -1,12 +1,18 @@
 export const copyToClipboard = (answers) => {
   const currDate = new Date();
-  const copyText = `Trivial score ${formatCurrentDate(currDate)} \n
-  1. \n
-  2. \n
-  3. \n
-  4. \n
-  5. \n`;
+  let copyText = `Trivial score ${formatCurrentDate(currDate)} \n`;
 
+  console.log(answers);
+
+  answers.forEach((answer, index) => {
+
+    if (answer === "correct") {
+      copyText = copyText + `${index + 1}. ✅\n`;
+    } else {
+      copyText = copyText + `${index + 1}. ❌\n`;
+    }    
+  });
+ 
   navigator.clipboard.writeText(copyText);
 }
 

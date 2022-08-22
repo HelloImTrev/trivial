@@ -67,9 +67,7 @@ export const PreGame = ({ setGameStatus }) => {
             <button className="start-button" onClick={() => startGame()}>
               Start
             </button>
-            <button className="rules-button">
-              Rules
-            </button>
+            <button className="rules-button">Rules</button>
           </div>
         </div>
       ) : (
@@ -97,8 +95,11 @@ export const PreGame = ({ setGameStatus }) => {
               <DayTimer />
             </div>
           </div>
-          <button className="start-button" onClick={() => copyToClipboard(prevAnswers)}>
-              Share
+          <button
+            className="start-button"
+            onClick={() => copyToClipboard(prevAnswers)}
+          >
+            Share
           </button>
         </div>
       )}
