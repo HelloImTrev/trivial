@@ -1,4 +1,4 @@
-var baseDate = new Date("8/19/2022");
+var baseDate = new Date("8/24/2022");
 var today = new Date();
 today.setDate(today.getDate());
 
