@@ -230,7 +230,7 @@ p {
   line-height: 24px;
   width: 35%;
   padding: 0 25px;
-  position: relative;
+  /* position: relative; */
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -254,7 +254,7 @@ p {
   line-height: 24px;
   width: 35%;
   padding: 0 25px;
-  position: relative;
+  /* position: relative; */
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -281,7 +281,7 @@ p {
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
-
+  align-items: center;
 }
 
 .rules-container {
