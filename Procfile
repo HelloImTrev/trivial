@@ -1,1 +1,1 @@
-web: node src/trivial-prod.js
+web: node src/server.js
