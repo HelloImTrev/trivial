@@ -74,7 +74,7 @@ p {
 .game-container {
   display: flex;
   justify-content: center;
-  max-height: 390px;
+  /* max-height: 390px; */
   margin-top: 1rem;
 }
 
