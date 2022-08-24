@@ -9,6 +9,7 @@ export const App = () => {
   const [gameStatus, setGameStatus] = useState(
     JSON.parse(localStorage.getItem("gameStatus"))
   );
+  
 
   useEffect(() => {
     if (!localStorage.getItem("gameStatus")) {

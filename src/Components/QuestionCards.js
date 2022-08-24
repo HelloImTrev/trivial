@@ -5,9 +5,7 @@ import { Timer } from "./Timer";
 import { Tracker } from "./Tracker";
 
 export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(
-    JSON.parse(localStorage.getItem("answer_key")).length
-  );
+  const [currentQuestion, setCurrentQuestion] = useState(0);
 
   const [answers, setAsnwers] = useState([]);
   const [answered, setAnswered] = useState(false);
@@ -21,9 +19,16 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
   ]);
 
   useEffect(() => {
-    setAsnwers(getAnswers(questions[currentQuestion]));
-    nextButton.current.disabled = true;
-    nextButton.current.className = "next-button-disabled";
+    if(JSON.parse(localStorage.getItem("answer_key")).length === 5) {
+      finishGame();
+    } else {
+      setCurrentQuestion(JSON.parse(localStorage.getItem("answer_key")).length);
+      setAsnwers(getAnswers(questions[currentQuestion]));
+      nextButton.current.disabled = true;
+      nextButton.current.className = "next-button-disabled";
+    }
+
+    console.log('effect');
   }, [currentQuestion]);
 
   const nextQuestion = () => {
@@ -31,6 +36,7 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       button.current.disabled = false;
       button.current.style.backgroundColor = "#eebbc3";
     }
+
     setCurrentQuestion(currentQuestion + 1);
   };
 
@@ -47,9 +53,6 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       <div className="question-text-container">
         <h2 className="question-text">{questions[currentQuestion].question}</h2>
       </div>
-      {/* <div className="timer-container">
-        <Timer setTimeExpired={setTimeExpired} />
-      </div> */}
       <div className="question-answers">
         <Answers
           answers={answers}
