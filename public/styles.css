@@ -74,6 +74,8 @@ p {
 .game-container {
   display: flex;
   justify-content: center;
+  max-height: 390px;
+  margin-top: 1rem;
 }
 
 .credits {
@@ -109,6 +111,7 @@ p {
 .question-text {
   font-family: 'Dosis', sans-serif;
   color: white;
+  margin-bottom: 0;
 }
 
 .question-card {
@@ -118,7 +121,7 @@ p {
 }
 
 .question-answers {
-  margin-top: 5rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -197,12 +200,12 @@ p {
   cursor: pointer;
   display: flex;
   font-family: 'Titillium Web', sans-serif;
-  font-size: auto;
-  height: 68px;
+  font-size: 13px;
+  min-height: 68px;
   justify-content: center;
-  line-height: 24px;
+  /* line-height: 24px; */
   width: 100%;
-  padding: 0 25px;
+
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -221,7 +224,7 @@ p {
   cursor: pointer;
   display: flex;
   font-family: 'Titillium Web', sans-serif;
-  font-size: 16px;
+  font-size: auto;
   height: 48px;
   justify-content: center;
   line-height: 24px;
@@ -245,7 +248,7 @@ p {
   cursor: pointer;
   display: flex;
   font-family: 'Titillium Web', sans-serif;
-  font-size: 16px;
+  font-size: auto;
   height: 48px;
   justify-content: center;
   line-height: 24px;
@@ -341,3 +344,40 @@ p {
   margin-right: .25rem;
 }
 
+@media (max-width: 661px) {
+  .answer-button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 501px) {
+  .answer-button {
+    height: auto;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 351px) {
+  .rules {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #b8c1ec;
+    border: #6e738f solid 2px;
+    border-radius: 10px;
+    width: 300px;
+  }
+
+  .question-card {
+    width: 400px;
+  }
+
+  .question-text {
+    font-size: 20px;
+  }
+
+  .answer-button {
+    height: auto;
+    font-size: 11px;
+  }
+}
