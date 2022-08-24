@@ -19,10 +19,10 @@ export const Answers = ({
     }
 
     const correctButton = answerButtons.current.find(
-      (button) => button.current.innerText === question.correctAnswer
+      (button) => button.current.innerHTML === question.correctAnswer
     );
     const selectedAnswer = answerButtons.current.find(
-      (button) => button.current.innerText === answer.answer
+      (button) => button.current.innerHTML === answer.answer
     );
 
     if (answer.answer === question.correctAnswer) {
@@ -38,24 +38,24 @@ export const Answers = ({
       setAnswered(true);
     }
   };
+  ///// Function for timer hitting zero if implemented /////
+  // if (timeExpired) {
+  //   nextButton.current.className = "next-button";
+  //   nextButton.current.disabled = false;
 
-  if (timeExpired) {
-    nextButton.current.className = "next-button";
-    nextButton.current.disabled = false;
+  //   for (const button of answerButtons.current) {
+  //     button.current.disabled = true;
+  //   }
 
-    for (const button of answerButtons.current) {
-      button.current.disabled = true;
-    }
+  //   const correctAnswer = answerButtons.current.find(
+  //     (button) => button.current.innerText === questions[currentQuestion].correctAnswer
+  //   );
 
-    const correctAnswer = answerButtons.current.find(
-      (button) => button.current.innerText === questions[currentQuestion].correctAnswer
-    );
-
-    answer_key[currentQuestion] = "incorrect";
-    localStorage.setItem("answer_key", JSON.stringify(answer_key));
-    correctAnswer.current.style.backgroundColor = "#b1f1cd";
-    setAnswered(true);
-  };
+  //   answer_key[currentQuestion] = "incorrect";
+  //   localStorage.setItem("answer_key", JSON.stringify(answer_key));
+  //   correctAnswer.current.style.backgroundColor = "#b1f1cd";
+  //   setAnswered(true);
+  // };
 
   return (
     <>

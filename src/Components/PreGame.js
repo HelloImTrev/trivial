@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { copyToClipboard } from "../Utility/share";
 import { Answers } from "./Answers";
 import { DayTimer } from "./DayTimer";
+import { Rules } from "./Rules";
 
 export const PreGame = ({ setGameStatus }) => {
+  const [seeRules, setSeeRules] = useState(false);
+
   const prevAnswers = JSON.parse(localStorage.getItem("prev_answers"));
   let streak = JSON.parse(localStorage.getItem("streak"));
   let last_played = new Date(
@@ -27,9 +30,9 @@ export const PreGame = ({ setGameStatus }) => {
 
   const startGame = () => {
     if (diff <= 1) {
-      localStorage.setItem("streak", streak + 1);
+      localStorage.setItem("streak", JSON.stringify(streak + 1));
     } else {
-      localStorage.setItem("streak", 0);
+      localStorage.setItem("streak", JSON.stringify(1));
     }
 
     localStorage.setItem("last_played", date);
@@ -39,6 +42,7 @@ export const PreGame = ({ setGameStatus }) => {
 
   return (
     <div className="pre-game-card">
+      {seeRules ? (<Rules setSeeRules={setSeeRules} />):null}
       {diff > 0 ? (
         <div>
           <div>
@@ -67,7 +71,7 @@ export const PreGame = ({ setGameStatus }) => {
             <button className="start-button" onClick={() => startGame()}>
               Start
             </button>
-            <button className="rules-button">Rules</button>
+            <button className="rules-button" onClick={() => setSeeRules(true)}>Rules</button>
           </div>
         </div>
       ) : (
