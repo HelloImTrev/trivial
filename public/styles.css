@@ -89,6 +89,7 @@ p {
 .question-text-container {
   margin-left: 1rem;
   margin-right: 1rem;
+  height: 70px;
   text-align: center;
 }
 
@@ -357,7 +358,9 @@ p {
   }
 }
 
-@media (max-width: 351px) {
+
+
+@media (max-width: 390px) {
   .rules {
     display: flex;
     flex-direction: column;
@@ -368,12 +371,12 @@ p {
     width: 300px;
   }
 
-  .question-card {
-    width: 400px;
-  }
-
   .question-text {
     font-size: 20px;
+  }
+
+  .question-card {
+    width: 350px;
   }
 
   .answer-button {
