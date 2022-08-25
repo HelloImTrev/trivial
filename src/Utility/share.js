@@ -7,16 +7,17 @@ export const copyToClipboard = (answers) => {
   answers.forEach((answer, index) => {
 
     if (answer === "correct") {
-      copyText = copyText + `${index + 1}. ✅\n`;
+      copyText = copyText + `✅\n`;
     } else {
-      copyText = copyText + `${index + 1}. ❌\n`;
+      copyText = copyText + `❌\n`;
     }    
   });
 
   if(navigator.canShare) {
     navigator.share({
       text: copyText
-    })
+    }).then(() => console.log("Shared"))
+      .catch(e => console.log(e));
   } else {
     navigator.clipboard.writeText(copyText);
   }
