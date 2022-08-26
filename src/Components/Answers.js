@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import gsap from "gsap";
 
 export const Answers = ({
   answers,
@@ -13,6 +14,7 @@ export const Answers = ({
   const checkAnswer = (answer, question) => {
     nextButton.current.className = "next-button";
     nextButton.current.disabled = false;
+
 
     for (const button of answerButtons.current) {
       button.current.disabled = true;
@@ -32,12 +34,21 @@ export const Answers = ({
       setAnswered(true);
     } else {
       answer_key[currentQuestion] = "incorrect";
+
+      gsap.to(selectedAnswer.current, {
+        x: 5,
+        duration: .05,
+        repeat: 5,
+        yoyo: true
+      });
+
       localStorage.setItem("answer_key", JSON.stringify(answer_key));
       selectedAnswer.current.style.backgroundColor = "#fc6060";
       correctButton.current.style.backgroundColor = "#b1f1cd";
       setAnswered(true);
     }
   };
+
   ///// Function for timer hitting zero if implemented /////
   // if (timeExpired) {
   //   nextButton.current.className = "next-button";
@@ -64,7 +75,7 @@ export const Answers = ({
           <button
             key={index}
             ref={answerButtons.current[index]}
-            className="answer-button"
+            className='answer-button'
             onClick={() => checkAnswer(answer, questions[currentQuestion])}
           >
             {answer.answer}

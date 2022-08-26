@@ -1,8 +1,15 @@
-import React, { useEffect, useState, useRef, createRef } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  createRef,
+  useLayoutEffect,
+} from "react";
 import { getAnswers } from "../Utility/questionFuncs";
 import { Answers } from "./Answers";
 import { Timer } from "./Timer";
 import { Tracker } from "./Tracker";
+import gsap from "gsap";
 
 export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -17,18 +24,42 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
     React.createRef(),
     React.createRef(),
   ]);
+  const questionContainer = useRef();
+  let delay = 1.2;
 
   useEffect(() => {
-    if(JSON.parse(localStorage.getItem("answer_key")).length === 5) {
+    if (JSON.parse(localStorage.getItem("answer_key")).length === 5) {
       finishGame();
     } else {
       setCurrentQuestion(JSON.parse(localStorage.getItem("answer_key")).length);
       setAsnwers(getAnswers(questions[currentQuestion]));
       nextButton.current.disabled = true;
       nextButton.current.className = "next-button-disabled";
-    }
 
-    console.log('effect');
+        for (const button of answerButtons.current) {
+          delay = delay + 0.2;
+  
+          gsap.fromTo(
+            button.current,
+            {
+              opacity: 0,
+              scale: 0,
+            },
+            { opacity: 1, scale: 1, duration: 1, delay: delay }
+          );
+        }
+
+    }
+  }, [currentQuestion]);
+
+  useLayoutEffect(() => {
+    gsap.fromTo(
+      questionContainer.current,
+      {
+        opacity: 0,
+      },
+      { opacity: 1, duration: 1, delay: 0.5 }
+    );
   }, [currentQuestion]);
 
   const nextQuestion = () => {
@@ -36,7 +67,6 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       button.current.disabled = false;
       button.current.style.backgroundColor = "#eebbc3";
     }
-
     setCurrentQuestion(currentQuestion + 1);
   };
 
@@ -50,7 +80,7 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
 
   return (
     <div className="question-card">
-      <div className="question-text-container">
+      <div className="question-text-container" ref={questionContainer}>
         <h2 className="question-text">{questions[currentQuestion].question}</h2>
       </div>
       <div className="question-answers">

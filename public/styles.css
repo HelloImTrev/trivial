@@ -87,6 +87,7 @@ p {
 }
 
 .question-text-container {
+  opacity: 0;
   margin-left: 1rem;
   margin-right: 1rem;
   height: 70px;
@@ -358,7 +359,12 @@ p {
   }
 }
 
+@media (max-width: 425px) {
+  .question-card {
+    width: 375px;
+  }
 
+}
 
 @media (max-width: 390px) {
   .rules {
