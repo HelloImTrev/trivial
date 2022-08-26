@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
 export const Answers = ({
@@ -11,10 +11,26 @@ export const Answers = ({
   setAnswered,
   timeExpired,
 }) => {
+  let delay = 1.2;
+
+  useLayoutEffect(() => {
+    for (const button of answerButtons.current) {
+      delay = delay + 0.2;
+
+      gsap.fromTo(
+        button.current,
+        {
+          opacity: 0,
+          scale: 0,
+        },
+        { opacity: 1, scale: 1, duration: 1, delay: delay }
+      );
+    }
+  }, [currentQuestion]);
+
   const checkAnswer = (answer, question) => {
     nextButton.current.className = "next-button";
     nextButton.current.disabled = false;
-
 
     for (const button of answerButtons.current) {
       button.current.disabled = true;
