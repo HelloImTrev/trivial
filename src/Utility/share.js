@@ -12,8 +12,15 @@ export const copyToClipboard = (answers) => {
       copyText = copyText + `${index + 1}. ❌\n`;
     }    
   });
+
+  if(navigator.canShare) {
+    navigator.share({
+      text: copyText
+    })
+  } else {
+    navigator.clipboard.writeText(copyText);
+  }
  
-  navigator.share(copyText);
 }
 
 const formatCurrentDate = (today) => {
