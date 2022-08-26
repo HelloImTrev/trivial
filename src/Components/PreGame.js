@@ -4,7 +4,7 @@ import { Answers } from "./Answers";
 import { DayTimer } from "./DayTimer";
 import { Rules } from "./Rules";
 
-export const PreGame = ({ setGameStatus }) => {
+export const PreGame = ({ setGameStatus, gameStatus }) => {
   const [seeRules, setSeeRules] = useState(false);
 
   const prevAnswers = JSON.parse(localStorage.getItem("prev_answers"));
@@ -17,6 +17,7 @@ export const PreGame = ({ setGameStatus }) => {
   let correctCount = 0;
   let percentage = 0;
   const diff = Math.floor((date.getTime() - last_played.getTime()) / 864e5);
+
 
   if (prevAnswers) {
     for (let i = 0; i < prevAnswers.length; i++) {
@@ -54,7 +55,7 @@ export const PreGame = ({ setGameStatus }) => {
             </strong>
             {prevAnswers ? (
               <p className="pre-score">
-                {correctCount} / {prevAnswers.length} correct ({percentage}%)
+                {correctCount} / 5 correct ({percentage}%)
               </p>
             ) : (
               <p className="pre-score">No score</p>
@@ -84,7 +85,7 @@ export const PreGame = ({ setGameStatus }) => {
               <p className="pre-score-label">Previous Score:</p>
             </strong>
             <p className="pre-score">
-              {correctCount} / {prevAnswers.length} correct ({percentage}%)
+              {correctCount} / 5 correct ({percentage}%)
             </p>
           </div>
           <div className="previous-score">

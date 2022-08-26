@@ -13,7 +13,7 @@ export const copyToClipboard = (answers) => {
     }    
   });
  
-  navigator.clipboard.writeText(copyText);
+  navigator.share(copyText);
 }
 
 const formatCurrentDate = (today) => {
