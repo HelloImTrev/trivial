@@ -1,8 +1,8 @@
-export const copyToClipboard = (answers) => {
+export const copyToClipboard = (answers, correctCount) => {
   const currDate = new Date();
-  let copyText = `Trivial score ${formatCurrentDate(currDate)} \n`;
+  let copyText = `Trivial score ${formatCurrentDate(currDate)} \n\n`;
 
-  answers.forEach((answer, index) => {
+  answers.forEach((answer) => {
 
     if (answer === "correct") {
       copyText = copyText + `✅\n`;
@@ -10,6 +10,8 @@ export const copyToClipboard = (answers) => {
       copyText = copyText + `❌\n`;
     }    
   });
+
+  copyText = copyText + `(${correctCount} / 5)`;
 
   if(navigator.canShare) {
     navigator.share({

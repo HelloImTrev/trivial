@@ -102,7 +102,7 @@ export const PreGame = ({ setGameStatus, gameStatus }) => {
           </div>
           <button
             className="start-button"
-            onClick={() => copyToClipboard(prevAnswers)}
+            onClick={() => copyToClipboard(prevAnswers, correctCount)}
           >
             Share
           </button>
