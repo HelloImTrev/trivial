@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
 
 export const Rules = ({ setSeeRules }) => {
+  const rules = useRef();
+
+  useLayoutEffect(() => {
+    gsap.fromTo(rules.current, {
+      opacity: 0,
+      y: 10
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: .5
+    })
+  })
+
   return (
     <div className="rules-container">
-      <div className="rules">
+      <div ref={rules} className="rules">
         <div className="rules-title-container">
           <h2 className="rules-title">Welcome to Trivial!</h2>
         </div>

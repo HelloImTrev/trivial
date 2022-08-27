@@ -11,22 +11,6 @@ export const Answers = ({
   setAnswered,
   timeExpired,
 }) => {
-  let delay = 1.2;
-
-  useLayoutEffect(() => {
-    for (const button of answerButtons.current) {
-      delay = delay + 0.2;
-
-      gsap.fromTo(
-        button.current,
-        {
-          opacity: 0,
-          scale: 0,
-        },
-        { opacity: 1, scale: 1, duration: 1, delay: delay }
-      );
-    }
-  }, [currentQuestion]);
 
   const checkAnswer = (answer, question) => {
     nextButton.current.className = "next-button";
@@ -53,9 +37,9 @@ export const Answers = ({
 
       gsap.to(selectedAnswer.current, {
         x: 5,
-        duration: .05,
+        duration: 0.05,
         repeat: 5,
-        yoyo: true
+        yoyo: true,
       });
 
       localStorage.setItem("answer_key", JSON.stringify(answer_key));
@@ -91,7 +75,7 @@ export const Answers = ({
           <button
             key={index}
             ref={answerButtons.current[index]}
-            className='answer-button'
+            className="answer-button"
             onClick={() => checkAnswer(answer, questions[currentQuestion])}
           >
             {answer.answer}

@@ -97,7 +97,7 @@ export const PreGame = ({ setGameStatus, gameStatus }) => {
           <div className="timer-cotainer">
             <div className="timer-text">Next Tirvial available in:</div>
             <div className="timer-numbers">
-              <DayTimer />
+              <DayTimer diff={diff}/>
             </div>
           </div>
           <button

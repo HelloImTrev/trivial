@@ -25,6 +25,7 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
     React.createRef(),
   ]);
   const questionContainer = useRef();
+  const answerContainer = useRef();
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("answer_key")).length === 5) {
@@ -45,12 +46,24 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       },
       { opacity: 1, duration: 1, delay: 0.5 }
     );
+
+    gsap.fromTo(
+      answerContainer.current,
+      {
+        scale: 0,
+      },
+      {
+        scale: 1,
+        duration: 0.5,
+        delay: 1.3,
+      }
+    );
   }, [currentQuestion]);
 
   const nextQuestion = () => {
     for (const button of answerButtons.current) {
-      button.current.disabled = false;
       button.current.style.backgroundColor = "#eebbc3";
+      button.current.disabled = false;
     }
     setCurrentQuestion(currentQuestion + 1);
   };
@@ -68,12 +81,11 @@ export const QuestionCards = ({ questions, setGameStatus, answer_key }) => {
       <div className="question-text-container" ref={questionContainer}>
         <h2 className="question-text">{questions[currentQuestion].question}</h2>
       </div>
-      <div className="question-answers">
+      <div className="question-answers" ref={answerContainer}>
         <Answers
           answers={answers}
           questions={questions}
           currentQuestion={currentQuestion}
-          // checkAnswer={checkAnswer}
           answer_key={answer_key}
           answerButtons={answerButtons}
           nextButton={nextButton}

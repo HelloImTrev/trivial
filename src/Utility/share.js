@@ -2,8 +2,6 @@ export const copyToClipboard = (answers) => {
   const currDate = new Date();
   let copyText = `Trivial score ${formatCurrentDate(currDate)} \n`;
 
-  console.log(answers);
-
   answers.forEach((answer, index) => {
 
     if (answer === "correct") {
