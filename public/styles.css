@@ -90,7 +90,7 @@ p {
   opacity: 0;
   margin-left: 1rem;
   margin-right: 1rem;
-  height: 70px;
+  min-height: 70px;
   text-align: center;
 }
 

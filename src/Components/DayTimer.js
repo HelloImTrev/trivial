@@ -13,9 +13,10 @@ export const DayTimer = () => {
     let mins = 59 - day.getMinutes();
     let secs = 59 - day.getSeconds();
     //hours === 0 && mins === 0 && secs === 0 ||
-    // if( diff >= 1) {
-    //   window.location.reload();
-    // }
+    if( hours === 0 && mins === 0 && secs === 0 ) {
+      clearInterval(myInterval);
+      window.location.reload();
+    }
 
     if ((hours + "").length === 1) {
       hours = "0" + hours;
@@ -32,7 +33,7 @@ export const DayTimer = () => {
     return `${hours}:${mins}:${secs}`;
   };
 
-  setInterval(() => {
+  const myInterval = setInterval(() => {
     setTimeLeft(formatTimer());
   }, 1000);
 
